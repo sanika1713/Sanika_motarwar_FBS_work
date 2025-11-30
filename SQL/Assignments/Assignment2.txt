@@ -1,0 +1,270 @@
+1.Create the table Member, Books and Issue without any constraints as
+mentioned in the schema description
+
+Member table
+    -> create table member
+    -> (Member_id int primary key,
+    -> Member_name varchar(30),
+    -> Member_address varchar(50),
+    -> Acc_Open_Date date,
+    -> Membership_type varchar(20)
+    -> check(Membership_type in('Lifetime','Annual','Half Yearly','Quarterly')),
+    -> Fees_paid int,
+    -> Max_Book_Allowed int,
+    -> penalty_Amount decimal(7,2));
+
+Books table
+    -> create table books
+    -> (Book_no int primary key,
+    -> Book_name varchar(30),
+    -> Author_name varchar(30),
+    -> Cost decimal(7,2),
+    -> Category char(10));
+
+Issue table
+    -> create table Issue
+    -> (Lib_issue_id int,
+    -> Book_no int,
+    -> foreign key(Book_no)
+    -> references Books(Book_no),
+    -> Member_id int,
+    -> foreign key(Member_id)
+    -> references Member(Member_id),
+    -> issue_date date,
+    -> Return_date date);
+
+
+2.View the structure of the tables.
+    ->desc Member;
+    ->desc Books;
+    ->desc Issue;
+
+
+3.Drop the Member table
+    -> drop table member;
+
+
+4.Create the table Member again as per the schema description with the
+following constraints.
+a. Member_Id – Primary Key
+b. Membership_type - ‘Lifetime’,’ Annual’, ‘Half Yearly’,’ Quarterly’
+
+    -> create table member
+    -> (Member_id int primary key,
+    -> Member_name varchar(30),
+    -> Member_address varchar(50),
+    -> Acc_Open_Date date,
+    -> Membership_type varchar(20)
+    -> check(Membership_type in('Lifetime','Annual','Half Yearly','Quarterly')),
+    -> Fees_paid int,
+    -> Max_Book_Allowed int,
+    -> penalty_Amount decimal(7,2));
+
+
+5.Modify the table Member increase the width of the member name to 30
+characters.
+    -> alter table member
+    -> modify Member_name varchar(40);
+
+
+6.Add a column named as Reference of Char(30) to Issue table.
+    -> alter table issue
+    -> add column reference char(30);
+
+
+7.Delete/Drop the column Reference from Issue.
+    -> alter table issue
+    -> drop column reference;
+
+
+8.Rename the table Issue to Lib_Issue.
+    -> rename table issue to Lib_issue;
+
+
+9.Insert following data in table Member
+    -> insert into member
+    -> values(1,'Richa Sharma','Pune','10-12-05','Lifetime',25000,5,50);
+   
+    -> insert into member(Member_id,Member_name,Member_address,Acc_Open_Date,Membership_type,fees_paid,Max_Book_Allowed)
+    -> values(2,'Garima Sen','Pune','21-11-21','Annual',1000,5);
+
+
+10.Insert at least 5 records with suitable data.
+    -> insert into member
+    -> values(3,'Aman varma','Mumbai','23-01-15','Annual',1500,3,20),
+    -> (4,'Sneha Patil','Nagpur','22-11-05','Lifetime',30000,5,0),
+    -> (5,'Rohit Kulkarni','Nashik','12-9-20','Annual',1200,4,400),
+    -> (6,'Kavita joshi','Mumbai','24-7-26','Half Yearly',3000,5,200),
+    -> (7,'Neha Deshmukh','Nashik','25-3-28','Annual',12000,7,0);
+
+
+11.Modify the column Member_name. Decrease the width of the member
+name to 20 characters. (If it does not allow state the reason for that)
+    -> alter table member
+    -> modify column member_name varchar(20)
+
+
+12.Try to insert a record with Max_Books_Allowed = 110, Observe the
+error that comes.
+
+
+13.Generate another table named Member101 using a Create command
+along with a simple SQL query on member table.
+     ->create table Member101 as(select * from member);
+
+
+14.Add the constraints on columns max_books_allowed and penalty_amt
+as follows
+a. max_books_allowed < 100
+b. penalty_amt maximum 1000
+    -> alter table member
+    -> modify column max_book_allowed int
+    -> check(max_book_allowed <110);
+
+    -> alter table member
+    -> modify column penalty_amount int
+    -> check(penalty_amount <=1000);
+
+
+15.Drop the table books.
+    -> drop table books;
+
+
+16.Create table Books again as per the schema description with the
+following constraints.
+a. Book_No – Primary Key
+b. Book_Name – Not Null
+c. Category – System, Fiction, Database, RDBMS, Others.
+    -> alter table books
+    -> modify column Book_no int primary key;
+
+    -> alter table books
+    -> modify column Book_name varchar(30) not null;
+
+    -> alter table books
+    -> modify column category char(10)
+    -> check(category in('System','Fiction','database','RDBMS','other'));
+
+
+17.Insert data in Book table
+    -> insert into books
+    -> values(101,'Let us c','Denis Ritchie',450,'system'),
+    -> (102,'Oracel complete ref','Loni',550,'Database'),
+    -> (103,'Mastering sql','Loni',250,'Database'),
+    -> (104,'PL SQL- ref','Scott urman',750,'Database');
+
+
+18.Insert more records in Book table.
+    -> insert into books
+    -> values(105,'python programming','Mark Lutz',650,'other'),
+    -> (106,'Data structure in C','Reema Thareja',500,'System'),
+    -> (107,'DBMS concepts','Korth',800,'Database');
+
+
+19.View the data in the tables using simple SQL query.
+    -> table books
+
+
+20.View the data in the tables using simple SQL query.
+105, National Geographic, Adis Scott, 1000, Science
+    -> insert into books
+    -> values(108,'National Geography','Adis Scott,',1000,'other');
+
+
+21.Rename the table Lib_Issue to Issue.
+    -> rename table Lid_Issue to Issue;
+
+
+22.Drop table Issue.
+    -> Drop table issue;
+
+
+23.As per the given structure Create table Issue again with following
+constraints.
+    -> create table Issue
+    -> (Lib_issue_id int,
+    -> Book_no int,
+    -> foreign key(Book_no)
+    -> references Books(Book_no),
+    -> Member_id int,
+    -> foreign key(Member_id)
+    -> references Member(Member_id),
+    -> issue_date date,
+    -> Return_date date);
+
+
+24.Insert following data into Issue table.
+    -> insert into issue(lib_issue_id,Book_no,Member_id,issue_date)
+    -> values(7001,101,1,'2025-12-06'),
+    -> (7002,102,2,'2025-12-11'),
+    -> (7003,104,1,'2006-1-15'),
+    -> (7004,101,1,'2006-7-04'),
+    -> (7005,104,2,'2006-11-15'),
+    -> (7006,101,3,'2006-02-18');
+
+
+25.Remove the constraints on Issue table
+    -> Alter table issue
+    -> drop foreign key issue_ibfk_1;
+
+
+26.Insert a record in Issue table. The member_id should not exist in member table.
+    -> insert into issue
+    -> values(7007,101,9,'2025-11-01','2025-12-25');
+
+
+27.Now enable the constraints of Issue table. Observe the error
+    ->alter table issue
+    -> add constraint issue_ibfk_1
+    -> foreign key(member_id)
+    -> references member(member_id);
+
+Cannot add or update a child row: a foreign key constraint fails (`julyfbs`.`issue`, CONSTRAINT `issue_ibfk_1` FOREIGN KEY (`Member_id`) REFERENCES `member` (`Member_id`))
+
+
+28.Delete the record inserted at Q-27) and enable the constraints.
+    -> delete from issue where lib_issue_id = 7007;
+
+
+29.Delete the record inserted at Q-27) and enable the constraints.
+	Cannot delete or update a parent row: a foreign key constraint fails (`julyfbs`.	`issue`, CONSTRAINT `issue_ibfk_1` FOREIGN KEY (`Member_id`) REFERENCES `member` 	(`Member_id`))
+
+
+30.View the data and structure of all the three tables Member, Issue, Book.
+     -> table member;
+     -> desc member;
+
+     -> table issue;
+     -> desc issue;
+
+     -> table book;
+     -> desc book;
+
+
+31.Modify the Return_Date of 7004,7005 to 15 days after the Issue_date.
+
+
+
+32.Remove all the records from Issue table where member_ID is 1 and Issue date in before 10-Dec-06.
+    -> delete from issue
+    -> where member_id = 1 and issue_date<'2006-12-10';
+
+
+33.Remove all the records from Book table with category other than RDBMS and Database.
+    -> delete table book
+    -> where category not in('RDBMS','Database');
+
+
+34.Remove the table Member.
+    -> drop table member;
+
+
+35.Remove the table Book.
+    -> drop table book;
+
+
+
+
+
+
+
